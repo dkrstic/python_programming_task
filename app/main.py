@@ -28,7 +28,7 @@ app = FastAPI()
 @app.post("/demo")
 async def proxy_request(request: Request):
     target_url = urljoin(TARGET_ENDPOINT, request.url.path)
-    post_data = request.json()
+    post_data = await request.json()
     username = post_data[USERNAME_PARAM]
     jwt_token = create_jwt_token(username)
     headers = {JWT_HEADER: jwt_token, CONTENT_TYPE_PARAM: DEFAULT_CONTENT_TYPE}
