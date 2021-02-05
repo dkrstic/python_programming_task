@@ -5,7 +5,6 @@ import uvicorn
 from datetime import date
 from urllib.parse import urljoin
 from fastapi import FastAPI, Request
-from fastapi.responses import ORJSONResponse
 
 
 TARGET_ENDPOINT = 'http://127.0.0.1:5000'
