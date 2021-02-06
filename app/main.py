@@ -25,7 +25,7 @@ PORT = 8000
 app = FastAPI()
 app.request_cnt = 0
 app.timer = time.time()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="app/templates")
 
 
 @app.post("/demo")
@@ -45,10 +45,10 @@ async def proxy_request(request: Request):
 
 
 @app.get("/status", response_class=HTMLResponse)
-async def read_item(request: Request):
+async def get_status(request: Request):
     elapsed = int(time.time() - app.timer)
     cnt = app.request_cnt
-    return templates.TemplateResponse("status.html", {"elapsed": elapsed, "cnt": cnt})
+    return templates.TemplateResponse("status.html", {"request": request, "elapsed": elapsed, "cnt": cnt})
 
 
 def create_jwt_token(username):
